@@ -1,0 +1,52 @@
+body {
+    background-color: #F8F0FB;
+  }
+  a, .nav-link {
+    color: white;
+  }
+  a:hover, .nav-link:hover {
+    color: #8075FF;
+  }
+  .navbar {
+    background-color: #211A1D;
+    height: 60px;
+  }
+  .active {
+    color: rgb(233, 233, 233);
+  }
+  .styler {
+    box-shadow: 2px 2px 2px black;
+  }
+  .card {
+    border-radius: 10px;
+    background-color: white;
+  }
+  .table {
+      margin-top: 15px;
+      border-radius: 10px;
+  }
+  .btn-primary {
+    background-color: #8075FF;
+    border: 1px solid #8075FF;
+    color: white;
+  }
+  .btn-primary:hover {
+    background-color: #6320EE;
+    border: 1px solid #6320EE;
+    color: white;
+  }
+  tr {
+    text-align: center;
+    font-weight: 500;
+  }
+  thead {
+      color: #211A1D;
+      font-weight: 600;
+  }
+  label, input {
+    margin: 5px;
+  }
+  h3 {
+    font-size: 26px;
+    font-weight: 500;
+  }
