@@ -1,0 +1,68 @@
+body {
+    background-color: var(--primary-color);
+    --primary-color: #E9FFF9;
+    --secondary-color: #1D3354;
+    --tertiary-color: #D64045;
+    --quaternary-color: #000F08;
+    --quinary-color: #F4FFF8;
+}
+  a, .nav-link {
+    color: white;
+  }
+  a:hover, .nav-link:hover {
+    color: var(--tertiary-color);
+  }
+  .navbar {
+    background-color: var(--secondary-color);
+    height: 60px;
+  }
+  .active {
+    color: rgb(233, 233, 233);
+  }
+  .styler {
+    box-shadow: 2px 2px 2px black;
+  }
+  .card {
+    border-radius: 10px;
+    background-color: var(--quinary-color);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  .table {
+      margin-top: 15px;
+      border-radius: 10px;
+      background-color: var(--quinary-color);
+  }
+  .btn-primary {
+    background-color: var(--tertiary-color);
+    border: 1px solid var(--tertiary-color);
+    color: white;
+  }
+  .btn-primary:hover {
+    background-color: var(--quaternary-color);
+    border: 1px solid var(--quaternary-color);
+    color: white;
+  }
+  .create-appointment-td {
+    width: 40%;
+  }
+  .pick-time-td {
+    width: 10px;
+  }
+  .pick-time-table {
+    width: 50%;
+  }
+  tr {
+    text-align: center;
+    font-weight: 500;
+  }
+  thead {
+      color: #211A1D;
+      font-weight: 600;
+  }
+  label, input {
+    margin: 5px;
+  }
+  h3 {
+    font-size: 26px;
+    font-weight: 500;
+  }
