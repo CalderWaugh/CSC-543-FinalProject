@@ -1,14 +1,19 @@
 body {
-    background-color: #F8F0FB;
-  }
+    background-color: var(--primary-color);
+    --primary-color: #E9FFF9;
+    --secondary-color: #1D3354;
+    --tertiary-color: #D64045;
+    --quaternary-color: #000F08;
+    --quinary-color: #F4FFF8;
+}
   a, .nav-link {
     color: white;
   }
   a:hover, .nav-link:hover {
-    color: #8075FF;
+    color: var(--tertiary-color);
   }
   .navbar {
-    background-color: #211A1D;
+    background-color: var(--secondary-color);
     height: 60px;
   }
   .active {
@@ -19,21 +24,32 @@ body {
   }
   .card {
     border-radius: 10px;
-    background-color: white;
+    background-color: var(--quinary-color);
+    border: 1px solid rgba(0, 0, 0, 0.3);
   }
   .table {
       margin-top: 15px;
       border-radius: 10px;
+      background-color: var(--quinary-color);
   }
   .btn-primary {
-    background-color: #8075FF;
-    border: 1px solid #8075FF;
+    background-color: var(--tertiary-color);
+    border: 1px solid var(--tertiary-color);
     color: white;
   }
   .btn-primary:hover {
-    background-color: #6320EE;
-    border: 1px solid #6320EE;
+    background-color: var(--quaternary-color);
+    border: 1px solid var(--quaternary-color);
     color: white;
+  }
+  .create-appointment-td {
+    width: 40%;
+  }
+  .pick-time-td {
+    width: 10px;
+  }
+  .pick-time-table {
+    width: 50%;
   }
   tr {
     text-align: center;
