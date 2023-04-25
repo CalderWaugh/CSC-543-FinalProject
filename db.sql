@@ -102,22 +102,22 @@ CREATE TABLE doctor(
 );
 
 #pssword key:Rob Jenkins= Rjenkins
-insert into doctor values (1234,1,'Rob Jenkins','Lead cardiologist',True,'pbkdf2:sha256:260000$i5qDMxkQI3EyuXZc$f14af114e33e09904248cc647abc84ec808bebc1fc20f6b9f2e8feef3ff5498d');
-Insert into doctor values (1235,1,'James Madison','Secondary Cardiologist',True,'sha256:260000$sb7KD0h59nt77VWi$a81973c98010ffa5195b70cc1eb3e55a6707c2fdeb16567165d010703548c5b1');
-insert into doctor values (1236,2,'Sara Flem','Head Surgeon',True,'pbkdf2:sha256:260000$kMLGYBR90XvcT7mJ$bd4e27a4fc09b70932079f15499db03c93b870e554592a734ce5e427436851c2');
-Insert into doctor values (1237,2,'Green Cox','Assistant Surgeon',True,'pbkdf2:sha256:260000$YWuPgHz32MCaqNWn$2a7ddc085e9d5ad390c8f0403ba6522ef5428b9618f1186c1cf972ce014e5f77');
-insert into doctor values (1238,3,'Aaron Tony','Lead Oncologist',True,'pbkdf2:sha256:260000$INg5TFTz7ql0zYyH$957f420ab9c589d95810db70535940b9af2ce379a0b69ff198e23193c5a9dfb0');
-Insert into doctor values (1239,3,'Jay Greer','Assistant Oncologist',True,'pbkdf2:sha256:260000$pzRWrB1aJLRqzi1d$1853848e0672bb4184ef96c693f397c1e384d8e2eb5b7da4c7378d5d195b51b6');
-Insert into doctor values (1240,4,'Jayla Haw','Lead MedSurge Physician',True,'pbkdf2:sha256:260000$1agZ0L7YWV4B7KDn$900c8a4f727fefce5cda5c5310359e9e5519306c1dcba39b02c97ddbe414ddf6');
-Insert into doctor values (1241,4,'Henry Banks','Secondary MedSurge Physician',True,'pbkdf2:sha256:260000$A8XWvpFj1CFmsVLN$173c26aedfae67102b15567b725268ff88483ab47521daba943daa7cb5baf3d4');
-Insert into doctor values (1242,5,'Harry Ore','Lead Psych Physician',True,'pbkdf2:sha256:260000$0DwbwaNJnjiz3q14$c55b0a18eadda871a2bb863930a59b4389bbaf4a9ee0ec5fb05e7fe2b4558ec4');
-Insert into doctor values (1243,5,'Linda Pete','Assistant Psych Physician',True,'pbkdf2:sha256:260000$vF9bmjNyM4T8zhIX$6ca98bd8d57047475a39f12f891ae975a178318d58decc389ef15c20793fcf86');
-Insert into doctor values (1244,6,'MJ Jones','Lead Neurologist',True,'pbkdf2:sha256:260000$wPP3OjsfbhMqihXN$2f65b9fe2c3674079e984f6b4c884840bd39b0e32ed7dbe99d6acec614d037ff');
-Insert into doctor values (1245,6,'Jimmy Dan',' Assistant Neurologist',True,'pbkdf2:sha256:260000$UkrNxTzoLfQr17iU$82b7190d187650c5322033881aa3dffe806a3ab19c293960bf0f9ff97b55cad8');
-insert into doctor values (1246,7,'Harry Ban','General Physician',True,'pbkdf2:sha256:260000$BOxdOAJUEXCdle3X$5d61eeca88abeef716e9a4b06f72213cad7622608f39ba42ac356da286b8357b');
-insert into doctor values (1247,7,'Phil Jane',' Assistant General Physician',True,'pbkdf2:sha256:260000$UFmHL9I1b9rO4tsX$6ff4cea44aeb0aa2f95086a4acc7f282b90b05b0a2bf5ca8a0ab433cd8ca9b7d');
-Insert into doctor values (1248,8,'Sara Bans','Head Radiologist',True,'pbkdf2:sha256:260000$SzrcuKO5W27ZGFi8$c3c47a1ca0c561d3216479f0261d297c0276d7c7774eebd8005b937f9cd73b70'); 
-Insert into doctor values (1249,8,'Peter Davies','Assistant Radiologist',True,'pbkdf2:sha256:260000$Qkz8vNPl48xXhaHU$ed4ef509ae8ca68c1eee450fac4d98277a70f0f83ab8259736e5142131cac1e3');
+insert into doctor values (1234, 'Rob Jenkins','Lead cardiologist',True,'pbkdf2:sha256:260000$i5qDMxkQI3EyuXZc$f14af114e33e09904248cc647abc84ec808bebc1fc20f6b9f2e8feef3ff5498d');
+Insert into doctor values (1235,'James Madison','Secondary Cardiologist',True,'sha256:260000$sb7KD0h59nt77VWi$a81973c98010ffa5195b70cc1eb3e55a6707c2fdeb16567165d010703548c5b1');
+insert into doctor values (1236,'Sara Flem','Head Surgeon',True,'pbkdf2:sha256:260000$kMLGYBR90XvcT7mJ$bd4e27a4fc09b70932079f15499db03c93b870e554592a734ce5e427436851c2');
+Insert into doctor values (1237,'Green Cox','Assistant Surgeon',True,'pbkdf2:sha256:260000$YWuPgHz32MCaqNWn$2a7ddc085e9d5ad390c8f0403ba6522ef5428b9618f1186c1cf972ce014e5f77');
+insert into doctor values (1238,'Aaron Tony','Lead Oncologist',True,'pbkdf2:sha256:260000$INg5TFTz7ql0zYyH$957f420ab9c589d95810db70535940b9af2ce379a0b69ff198e23193c5a9dfb0');
+Insert into doctor values (1239,'Jay Greer','Assistant Oncologist',True,'pbkdf2:sha256:260000$pzRWrB1aJLRqzi1d$1853848e0672bb4184ef96c693f397c1e384d8e2eb5b7da4c7378d5d195b51b6');
+Insert into doctor values (1240,'Jayla Haw','Lead MedSurge Physician',True,'pbkdf2:sha256:260000$1agZ0L7YWV4B7KDn$900c8a4f727fefce5cda5c5310359e9e5519306c1dcba39b02c97ddbe414ddf6');
+Insert into doctor values (1241,'Henry Banks','Secondary MedSurge Physician',True,'pbkdf2:sha256:260000$A8XWvpFj1CFmsVLN$173c26aedfae67102b15567b725268ff88483ab47521daba943daa7cb5baf3d4');
+Insert into doctor values (1242,'Harry Ore','Lead Psych Physician',True,'pbkdf2:sha256:260000$0DwbwaNJnjiz3q14$c55b0a18eadda871a2bb863930a59b4389bbaf4a9ee0ec5fb05e7fe2b4558ec4');
+Insert into doctor values (1243,'Linda Pete','Assistant Psych Physician',True,'pbkdf2:sha256:260000$vF9bmjNyM4T8zhIX$6ca98bd8d57047475a39f12f891ae975a178318d58decc389ef15c20793fcf86');
+Insert into doctor values (1244,'MJ Jones','Lead Neurologist',True,'pbkdf2:sha256:260000$wPP3OjsfbhMqihXN$2f65b9fe2c3674079e984f6b4c884840bd39b0e32ed7dbe99d6acec614d037ff');
+Insert into doctor values (1245,'Jimmy Dan',' Assistant Neurologist',True,'pbkdf2:sha256:260000$UkrNxTzoLfQr17iU$82b7190d187650c5322033881aa3dffe806a3ab19c293960bf0f9ff97b55cad8');
+insert into doctor values (1246,'Harry Ban','General Physician',True,'pbkdf2:sha256:260000$BOxdOAJUEXCdle3X$5d61eeca88abeef716e9a4b06f72213cad7622608f39ba42ac356da286b8357b');
+insert into doctor values (1247,'Phil Jane',' Assistant General Physician',True,'pbkdf2:sha256:260000$UFmHL9I1b9rO4tsX$6ff4cea44aeb0aa2f95086a4acc7f282b90b05b0a2bf5ca8a0ab433cd8ca9b7d');
+Insert into doctor values (1248,'Sara Bans','Head Radiologist',True,'pbkdf2:sha256:260000$SzrcuKO5W27ZGFi8$c3c47a1ca0c561d3216479f0261d297c0276d7c7774eebd8005b937f9cd73b70'); 
+Insert into doctor values (1249,'Peter Davies','Assistant Radiologist',True,'pbkdf2:sha256:260000$Qkz8vNPl48xXhaHU$ed4ef509ae8ca68c1eee450fac4d98277a70f0f83ab8259736e5142131cac1e3');
 
 
 drop table if exists appointment;
@@ -135,71 +135,71 @@ FOREIGN KEY (doctor_employee_id) REFERENCES Doctor (doctor_employee_id),
 Primary key (appointment_id)
 );
 
-  insert into appointment (patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type) values
-  (11,1234,1101,'in progress','2022-11-29 08:00:00',null,'emergency','electrocardiogram');
+  insert into appointment (patient_id, doctor_employee_id, status, admission_date, discharge_date, admission_type, exam_type) values
+  (11,1234,'in progress','2022-11-29 08:00:00',null,'emergency','electrocardiogram');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type) values
- (48,1234,1101,'completed','2022-11-29 09:00:00','2022-11-30 10:00:00','emergency','echocardiogram');
+ (48,1234,'completed','2022-11-29 09:00:00','2022-11-30 10:00:00','emergency','echocardiogram');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (11,1234,1101,'canceled','2022-11-29 12:00:00',null,'emergency','MRI');
+ (11,1234,'canceled','2022-11-29 12:00:00',null,'emergency','MRI');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type) values
- (13,1235,1102,'completed','2022-11-29 08:00:00','2022-11-29 1:00:00','emergency','stress test');  
+ (13,1235,'completed','2022-11-29 08:00:00','2022-11-29 1:00:00','emergency','stress test');  
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (50,1235,1102,'canceled','2022-11-29 09:00:00',null,'emergency','electrocardiogram');
+ (50,1235,'canceled','2022-11-29 09:00:00',null,'emergency','electrocardiogram');
     insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (15,1236,1103,'not started','2022-11-29 08:00:00',null,'emergency','Fish hook removal');
+ (15,1236,'not started','2022-11-29 08:00:00',null,'emergency','Fish hook removal');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values 
- (52,1236,1103,'completed','2022-11-29 10:00:00','2022-11-30 10:00:00','emergency','Laceration repair');
+ (52,1236,'completed','2022-11-29 10:00:00','2022-11-30 10:00:00','emergency','Laceration repair');
     insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (18,1237,1104,'canceled','2022-11-29 08:00:00',null,'emergency','Lumbar Puncture');
+ (18,1237,'canceled','2022-11-29 08:00:00',null,'emergency','Lumbar Puncture');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (54,1237,1104,'completed','2022-11-29 09:00:00','2022-11-30 10:00:00','emergency','Paracentesis');
+ (54,1237,'completed','2022-11-29 09:00:00','2022-11-30 10:00:00','emergency','Paracentesis');
     insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (10,1238,1105,'in progress','2022-11-29 11:00:00',null,'emergency','Blood test');
+ (10,1238,'in progress','2022-11-29 11:00:00',null,'emergency','Blood test');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (56,1238,1105,'completed','2022-11-29 08:00:00','2022-11-29 10:00:00','emergency','Urine test');
+ (56,1238,'completed','2022-11-29 08:00:00','2022-11-29 10:00:00','emergency','Urine test');
     Insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (20,1239,1106,'completed','2022-11-29 15:00:00','2022-11-29 11:00:00','emergency','MRI');
+ (20,1239,'completed','2022-11-29 15:00:00','2022-11-29 11:00:00','emergency','MRI');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (58,1239,1106,'completed','2022-11-29 08:00:00','2022-11-29 09:00:00','emergency','Biopsy');
+ (58,1239,'completed','2022-11-29 08:00:00','2022-11-29 09:00:00','emergency','Biopsy');
     Insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (23,1240,1107,'in progress','2022-11-29 10:00:00',null,'emergency','Skin Therapy');
+ (23,1240,'in progress','2022-11-29 10:00:00',null,'emergency','Skin Therapy');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (60,1240,1107,'canceled','2022-11-29 08:00:00',null,'emergency','Gallbladder Removal');
+ (60,1240,'canceled','2022-11-29 08:00:00',null,'emergency','Gallbladder Removal');
     insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (26,1241,1108,'completed','2022-11-29 09:30:00','2022-11-29 11:30:00','emergency','ACL Repair');
+ (26,1241,'completed','2022-11-29 09:30:00','2022-11-29 11:30:00','emergency','ACL Repair');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (62,1241,1108,'in progress','2022-11-29 12:00:00',null,'emergency','MCL Repair');
+ (62,1241,'in progress','2022-11-29 12:00:00',null,'emergency','MCL Repair');
     insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (29,1242,1109,'in progress','2022-11-29 10:00:00',null,'emergency','Psychological testing');
+ (29,1242,'in progress','2022-11-29 10:00:00',null,'emergency','Psychological testing');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values 
- (63,1242,1109,'completed','2022-11-30 08:00:00','2022-11-30 10:00:00','emergency','Psychological testing');
+ (63,1242,'completed','2022-11-30 08:00:00','2022-11-30 10:00:00','emergency','Psychological testing');
     Insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (31,1243,1110,'completed','2022-11-29 10:00:00','2022-11-29 05:00:00','emergency','Psychological testing');
+ (31,1243,'completed','2022-11-29 10:00:00','2022-11-29 05:00:00','emergency','Psychological testing');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (64,1243,1110,'canceled','2022-11-30 08:00:00',null,'emergency','Psychological testing');
+ (64,1243,'canceled','2022-11-30 08:00:00',null,'emergency','Psychological testing');
     Insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (36,1244,1111,'canceled','2022-11-29 10:30:00',null,'emergency','Blood test');
+ (36,1244,'canceled','2022-11-29 10:30:00',null,'emergency','Blood test');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (66,1244,1111,'completed','2022-11-30 08:00:00','2022-11-30 10:00:00','emergency','X-Ray');
+ (66,1244,'completed','2022-11-30 08:00:00','2022-11-30 10:00:00','emergency','X-Ray');
 insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (38,1245,1112,'in progress','2022-11-29 12:00:00',null,'emergency','Biopsy');
+ (38,1245,'in progress','2022-11-29 12:00:00',null,'emergency','Biopsy');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (68,1245,1112,'completed','2022-11-30 08:00:00','2022-12-01 10:00:00','emergency','Blood Test');
+ (68,1245,'completed','2022-11-30 08:00:00','2022-12-01 10:00:00','emergency','Blood Test');
  insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (40,1246,1113,'completed','2022-11-29 10:00:00','2022-11-29 11:30:00','emergency','Burn excision');
+ (40,1246,'completed','2022-11-29 10:00:00','2022-11-29 11:30:00','emergency','Burn excision');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (70,1246,1113,'in progress','2022-11-29 12:00:00',null,'emergency','Hernia Repair');
+ (70,1246,'in progress','2022-11-29 12:00:00',null,'emergency','Hernia Repair');
  insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (42,1247,1114,'completed','2022-11-29 08:00:00','2022-11-30 10:00:00','emergency','Skin therapy');
+ (42,1247,'completed','2022-11-29 08:00:00','2022-11-30 10:00:00','emergency','Skin therapy');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (72,1247,1114,'completed','2022-11-30 11:00:00','2022-12-01 10:00:00','emergency','Urine Test');
+ (72,1247,'completed','2022-11-30 11:00:00','2022-12-01 10:00:00','emergency','Urine Test');
  insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (44,1248,1115,'canceled','2022-11-29 14:00:00',null,'emergency','CT Scan');
+ (44,1248,'canceled','2022-11-29 14:00:00',null,'emergency','CT Scan');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (74,1248,1115,'canceled','2022-11-29 08:00:00',null,'emergency','Mammography');
+ (74,1248,'canceled','2022-11-29 08:00:00',null,'emergency','Mammography');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (46,1249,1116,'completed','2022-11-29 08:00:00','2022-11-30 11:00:00','emergency','MRI');
+ (46,1249,'completed','2022-11-29 08:00:00','2022-11-30 11:00:00','emergency','MRI');
   insert into appointment(patient_id, doctor_employee_id, nurse_employee_id, status, admission_date, discharge_date, admission_type, exam_type)values
- (76,1249,1116,'completed','2022-11-29 13:00:00','2022-11-30 03:00:00','emergency','MRI');
+ (76,1249,'completed','2022-11-29 13:00:00','2022-11-30 03:00:00','emergency','MRI');
  
  

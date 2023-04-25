@@ -40,10 +40,31 @@
                   <input type="text" id="fname" name="fname"><br>
                   <label for="lname">Last name:</label>
                   <input type="text" id="lname" name="lname"><br>
-                  <input type="submit" value="Search" class="btn btn-primary">
+                  <button type="submit" id="search_doctors_btn" class="btn btn-primary">Search</button>
                 </form>
               </div>
             </div>
+          </div>
+          <br>
+          <h3>Matching Doctors</h3>
+          <div style="padding: 0 25%;">
+              <table class="table styler doc_results">
+                  <thead>
+                      <th>Doctor</th>
+                  </thead>
+                  <tr>
+                    <td>John Doe</td>
+                    <td class="create-appointment-td"><button class="btn btn-primary btn-sm">Create Appointment</button></td>
+                  </tr>
+                  <tr>
+                    <td>Jane Doe</td>
+                    <td class="create-appointment-td"><button class="btn btn-primary btn-sm">Create Appointment</button></td>
+                  </tr>
+                  <tr>
+                    <td>Bob Doe</td>
+                    <td class="create-appointment-td"><button class="btn btn-primary btn-sm">Create Appointment</button></td>
+                  </tr>
+              </table>
           </div>
         </div>
       </div>
