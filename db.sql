@@ -8,7 +8,7 @@ Create table Patient (
    username varchar (20),
    first_name varchar (20),
    last_name varchar (20),
-   password varchar (20),
+   password varchar (200),
 primary key (patient_id)
 );
 
@@ -18,7 +18,7 @@ CREATE TABLE doctor(
    username varchar (20),
    first_name varchar (20),
    last_name varchar (20),
-   password varchar (20),
+   password varchar (200),
    PRIMARY KEY(doctor_employee_id)
 );
 
@@ -36,6 +36,3 @@ Create table Appointment(
    FOREIGN KEY (doctor_employee_id) REFERENCES Doctor (doctor_employee_id),
    Primary key (appointment_id)
 );
-
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '*******';
-flush privileges;

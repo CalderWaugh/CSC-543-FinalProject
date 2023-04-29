@@ -1,15 +1,19 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const bcrypt = require("bcryptjs");
 const dotenv = require('dotenv');
 
-const current_user = {
+let current_user = {
   logged_in: false,
   username: '',
   first_name: '',
   last_name: ''
+}
+
+let templateObj = {
+  current_user: current_user
 }
 
 app.use(express.static(path.join(__dirname, "/public")));
@@ -24,16 +28,9 @@ const db = mysql.createConnection({
   database: process.env.DATABASE
 })
 
-db.connect((error) => {
-  if(error) {
-      console.log(error)
-  } else {
-      console.log("MySQL connected!")
-  }
-})
+db.connect((error) =>  error ? console.log(error) : console.log("Connected to database!"));
 
 async function queryExec(query) { return await promiseQuery(query) };
-
 function promiseQuery(query) {
     return new Promise((resolve, reject) => {
         db.query(query, (err, results) => {
@@ -44,7 +41,6 @@ function promiseQuery(query) {
 }
 
 async function hashPassword(password) { return await passwordHasher(password) };
-
 function passwordHasher(password) {
   return new Promise((resolve, reject) => {
     bcrypt
@@ -60,12 +56,12 @@ app.use(express.urlencoded({
 }))
 
 app.get("/", (req, res) => {
-  console.log(current_user);
-  res.render("home");
+  res.render("home", templateObj);
 });
 
 app.get("/login", (req, res) => {
-  res.render("login", { message: '' });
+  templateObj.message = ''
+  res.render("login", templateObj);
 });
 
 app.post("/login", async (req, res) => {
@@ -88,17 +84,21 @@ app.post("/login", async (req, res) => {
       current_user.username = user.username;
       current_user.first_name = user.first_name;
       current_user.last_name = user.last_name;
+      templateObj.current_user = current_user;
       return res.redirect('/');
     } else {
-      return res.render('login', { message: 'Password doesn\'t match' })
+      templateObj.message = 'Incorrect Password';
+      return res.render('login', templateObj);
     }
   }
-  return res.render('login', { message: 'Unknown user' })
+  templateObj.message = 'Unknown user';
+  return res.render('login', templateObj)
 });
 
 
 app.get("/signup", (req, res) => {
-  res.render("signup", { message: '' });
+  templateObj.message = '';
+  res.render("signup", templateObj);
 });
 
 app.post("/signup", async (req, res) => {
@@ -108,7 +108,10 @@ app.post("/signup", async (req, res) => {
   
   users = await queryExec(query);
 
-  if( users.length > 0 ) return res.render('signup', {message: "That username already exists"});
+  if( users.length > 0 ) {
+    templateObj.message = "That username already exists";
+    return res.render('signup', templateObj);
+  }
 
   const hashedPassword = await hashPassword(password);
 
@@ -117,28 +120,59 @@ app.post("/signup", async (req, res) => {
   return res.redirect('../login');
 });
 
+app.post('/logout', (req,res) => {
+  if (!current_user.logged_in) return res.redirect('/');
+  current_user = {
+    logged_in: false,
+    username: '',
+    first_name: '',
+    last_name: ''
+  }
+  templateObj.current_user = current_user;
+  return res.redirect('/')
+});
+
 app.get("/myappointments", (req, res) => {
-  res.render("myappointments");
+  if (!current_user.logged_in) return res.redirect('/');
+  res.render("myappointments", templateObj);
 });
 
 app.get("/create_appointment", (req, res) => {
-  res.render("create_appointment");
+  if (!current_user.logged_in) return res.redirect('/');
+  res.render("create_appointment", templateObj);
 });
 
 app.get("/available_times", (req, res) => {
-  res.render("available_times");
+  if (!current_user.logged_in) return res.redirect('/');
+  res.render("available_times", templateObj);
 });
 
 app.get("/appointment_pick_date", (req, res) => {
-  res.render("appointment_pick_date");
+  if (!current_user.logged_in) return res.redirect('/');
+  res.render("appointment_pick_date", templateObj);
 });
 
 app.get("/doctor_search", (req, res) => {
-  res.render("doctor_search");
+  if (!current_user.logged_in) return res.redirect('/');
+  templateObj.doctors = [];
+  res.render("doctor_search", templateObj);
+});
+
+app.post("/doctor_search", async (req, res) => {
+  if (!current_user.logged_in) return res.redirect('/');
+  const { fname, lname } = req.body;
+  let docs = '';
+  let query = `SELECT doctor_employee_id, first_name, last_name FROM doctor WHERE first_name LIKE '%${fname}%' AND last_name LIKE '%${lname}%'`;
+  
+  docs = await queryExec(query);
+
+  templateObj.doctors = docs;
+  res.render('doctor_search', templateObj);
 });
 
 app.get("/doctor_results", (req, res) => {
-  res.render("doctor_results");
+  if (!current_user.logged_in) return res.redirect('/');
+  res.render("doctor_results", templateObj);
 });
 
 app.listen(80, () => {

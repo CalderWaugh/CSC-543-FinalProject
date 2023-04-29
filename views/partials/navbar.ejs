@@ -6,12 +6,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent"">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <% if (current_user.logged_in == true) { %>
         <li class='nav-item nav-item-left'><a class="nav-link" href="/doctor_search">Doctors</a></li>
         <li class='nav-item nav-item-left'><a class="nav-link" href="/myappointments">My Appointments</a></li>
+      <% } %>
       </ul>
       <ul class="navbar-nav d-flex">
-        <li class='nav-item nav-item-left'><a class="nav-link" href="/signup">Sign up</a></li>
-        <li class='nav-item nav-item-right'><a class="nav-link" href="/login">Login</a></li>
+        <% if (current_user.logged_in == false) { %>
+          <li class='nav-item nav-item-left'><a class="nav-link" href="/signup">Sign up</a></li>
+          <li class='nav-item nav-item-right'><a class="nav-link" href="/login">Login</a></li>
+        <% } else { %>
+          <li class='nav-item nav-item-left'><a class="nav-link nav-username" href="link.html" aria-current="page"><%= current_user.username %></a></li>
+          <form id="logout_form" method="post" action="/logout">
+            <li class='nav-item nav-item-right'><a class="nav-link logout" onclick="document.getElementById('logout_form').submit();">Log out</a></li>
+          </form>
+        <% } %>
       </ul>
     </div>
   </div>
