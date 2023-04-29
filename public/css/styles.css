@@ -51,6 +51,9 @@ body {
   .pick-time-table {
     width: 50%;
   }
+  .error-msg {
+    color: red;
+  }
   tr {
     text-align: center;
     font-weight: 500;
