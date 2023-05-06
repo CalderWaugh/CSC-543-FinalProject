@@ -16,10 +16,17 @@
           <li class='nav-item nav-item-left'><a class="nav-link" href="/signup">Sign up</a></li>
           <li class='nav-item nav-item-right'><a class="nav-link" href="/login">Login</a></li>
         <% } else { %>
-          <li class='nav-item nav-item-left'><a class="nav-link nav-username" href="link.html" aria-current="page"><%= current_user.username %></a></li>
-          <form id="logout_form" method="post" action="/logout">
-            <li class='nav-item nav-item-right'><a class="nav-link logout" onclick="document.getElementById('logout_form').submit();">Log out</a></li>
-          </form>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle nav-username" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= current_user.last_name %>, <%= current_user.first_name %> <i class="bi bi-person"></i>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li class='dropdown-item'><a class="nav-link dropdown-style" href="/myprofile">Profile</a></li>
+            <form id="logout_form" method="post" action="/logout">
+              <li class='dropdown-item'><a class="nav-link dropdown-style" onclick="document.getElementById('logout_form').submit();">Log out</a></li>
+            </form>
+          </ul>
+          </li>
         <% } %>
       </ul>
     </div>

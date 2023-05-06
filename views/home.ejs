@@ -22,7 +22,11 @@
                   <div class="card-body">
                     <h5 class="card-title">Appointments</h5>
                     <p class="card-text">View available appointment times, create new appointments, and view your upcomming appointments.</p>
-                    <a href="/myappointments" class="btn btn-primary">My Appointments</a>
+                    <% if (current_user.logged_in) { %>
+                      <a href="/myappointments" class="btn btn-primary">My Appointments</a>
+                    <% } else { %>
+                      <a href="/login" class="btn btn-primary">My Appointments</a>
+                    <% } %>
                   </div>
                 </div>
               </div>
@@ -31,7 +35,11 @@
                   <div class="card-body">
                     <h5 class="card-title">Doctors</h5>
                     <p class="card-text">View the various doctors in our database.</p>
-                    <a href="/doctor_search" class="btn btn-primary">View</a>
+                    <% if (current_user.logged_in) { %>
+                      <a href="/doctor_search" class="btn btn-primary">View</a>
+                    <% } else { %>
+                      <a href="/login" class="btn btn-primary">View</a>
+                    <% } %>
                   </div>
                 </div>
               </div>

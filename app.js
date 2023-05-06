@@ -12,6 +12,14 @@ let current_user = {
   last_name: ''
 }
 
+let new_appointment = {
+  admission_date: '',
+  doc_username: '',
+  doc_first_name: '',
+  doc_last_name: '',
+  date: '',
+}
+
 let templateObj = {
   current_user: current_user
 }
@@ -142,19 +150,38 @@ app.get("/create_appointment", (req, res) => {
   res.render("create_appointment", templateObj);
 });
 
-app.get("/available_times", (req, res) => {
+app.post("/find_available_times", (req, res) => {
+  if (!current_user.logged_in) return res.redirect('/');
+  const { doc_id, date } = req.body;
+  res.redirect(`/doctors/${doc_id}/${date}/pick_time`);
+});
+
+app.get("/doctors/:doc_id/:date/pick_time", (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   res.render("available_times", templateObj);
 });
 
-app.get("/appointment_pick_date", (req, res) => {
+app.get("/doctors/:doc_id/pick_date", (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
+  templateObj.doc_id = req.params.doc_id
   res.render("appointment_pick_date", templateObj);
 });
+
+app.get('/myprofile', (req, res) => {
+  if (!current_user.logged_in) return res.redirect('/');
+  res.redirect(`/profile/${current_user.id}`);
+})
+
+app.get('/profile/:id', (req, res) => {
+  if (!current_user.logged_in) return res.redirect('/');
+  let id = req.params.id
+  res.render("profile", templateObj);
+})
 
 app.get("/doctor_search", (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   templateObj.doctors = [];
+  templateObj.error = '';
   res.render("doctor_search", templateObj);
 });
 
@@ -167,6 +194,7 @@ app.post("/doctor_search", async (req, res) => {
   docs = await queryExec(query);
 
   templateObj.doctors = docs;
+  if (docs.length == 0) templateObj.error = 'No matching doctors';
   res.render('doctor_search', templateObj);
 });
 
