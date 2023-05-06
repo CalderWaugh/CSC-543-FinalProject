@@ -16,6 +16,12 @@ body {
     background-color: var(--secondary-color);
     height: 60px;
   }
+  .navbar-dark {
+    color: black;
+  }
+  .navbar-toggler {
+    color: white;
+  }
   .active {
     color: rgb(233, 233, 233);
   }
@@ -99,3 +105,20 @@ body {
     font-size: 26px;
     font-weight: 500;
   }
+  
+@media (min-width: 768px){
+  .col-style {
+    display: inline-block;
+    width: 300px;
+    height: fit-content;
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-style {
+    width: fit-content;
+    height: max-content;
+    margin: 20px 20px;
+  }
+}
