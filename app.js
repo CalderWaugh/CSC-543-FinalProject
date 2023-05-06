@@ -1,9 +1,10 @@
+// Import Modules
 const express = require("express");
 const path = require("path");
-const app = express();
 const mysql = require("mysql2");
 const bcrypt = require("bcryptjs");
 const dotenv = require('dotenv');
+const app = express();
 
 let current_user = {
   logged_in: false,
@@ -26,10 +27,20 @@ let templateObj = {
   current_user: current_user
 }
 
+// -------------------------
+// ------ APP SETUP --------
+// -------------------------
+
 app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 dotenv.config({ path: './.env'});
+
+
+// -------------------------
+// ------- DATABASE --------
+// -------------------------
 
 const db = mysql.createConnection({
   host: process.env.DATABASE_HOST,
@@ -37,7 +48,6 @@ const db = mysql.createConnection({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE
 })
-
 db.connect((error) =>  error ? console.log(error) : console.log("Connected to database!"));
 
 async function queryExec(query) { return await promiseQuery(query) };
@@ -50,6 +60,10 @@ function promiseQuery(query) {
     })
 }
 
+// -------------------------
+// --- PASSWORD HASHING ----
+// -------------------------
+
 async function hashPassword(password) { return await passwordHasher(password) };
 function passwordHasher(password) {
   return new Promise((resolve, reject) => {
@@ -61,13 +75,15 @@ function passwordHasher(password) {
 
 }
 
-app.use(express.urlencoded({
-  extended: true
-}))
-
+// Homepage
 app.get("/", (req, res) => {
   res.render("home", templateObj);
 });
+
+
+// -------------------------
+// -------- LOG IN ---------
+// -------------------------
 
 app.get("/login", (req, res) => {
   templateObj.message = ''
@@ -119,6 +135,9 @@ app.post("/login/:user_type", async (req, res) => {
   return res.render('login', templateObj)
 });
 
+// -------------------------
+// -------- SIGN UP --------
+// -------------------------
 
 app.get("/signup", (req, res) => {
   templateObj.message = '';
@@ -168,6 +187,10 @@ app.post('/logout', (req,res) => {
   return res.redirect('/')
 });
 
+// -------------------------
+// ----- APPOINTMENTS ------
+// -------------------------
+
 app.get("/myappointments", (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   res.render("myappointments", templateObj);
@@ -184,16 +207,21 @@ app.post("/find_available_times", (req, res) => {
   res.redirect(`/doctors/${doc_id}/${date}/pick_time`);
 });
 
-app.get("/doctors/:doc_id/:date/pick_time", (req, res) => {
-  if (!current_user.logged_in) return res.redirect('/');
-  res.render("available_times", templateObj);
-});
-
 app.get("/doctors/:doc_id/pick_date", (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   templateObj.doc_id = req.params.doc_id
   res.render("appointment_pick_date", templateObj);
 });
+
+app.get("/doctors/:doc_id/:date/pick_time", (req, res) => {
+  if (!current_user.logged_in) return res.redirect('/');
+  res.render("available_times", templateObj);
+});
+
+
+// -------------------------
+// -------- PROFILE --------
+// -------------------------
 
 app.get('/myprofile', (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
@@ -213,14 +241,18 @@ app.get('/profile/:user_type/:id', async (req, res) => {
   res.render("profile", templateObj);
 })
 
-app.get("/doctor_search", (req, res) => {
+// -------------------------
+// -------- DOCTOR ---------
+// -------------------------
+
+app.get("/doctors", (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   templateObj.doctors = [];
   templateObj.error = '';
   res.render("doctor_search", templateObj);
 });
 
-app.post("/doctor_search", async (req, res) => {
+app.post("/doctors", async (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   const { fname, lname } = req.body;
   let docs = '';
@@ -233,20 +265,18 @@ app.post("/doctor_search", async (req, res) => {
   res.render('doctor_search', templateObj);
 });
 
-app.get("/doctor_results", (req, res) => {
-  if (!current_user.logged_in) return res.redirect('/');
-  res.render("doctor_results", templateObj);
-});
+// -------------------------
+// ------- PATIENT ---------
+// -------------------------
 
-
-app.get("/patient_search", (req, res) => {
+app.get("/patients", (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   templateObj.patients = [];
   templateObj.error = '';
   res.render("patient_search", templateObj);
 });
 
-app.post("/patient_search", async (req, res) => {
+app.post("/patients", async (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   const { fname, lname } = req.body;
   let patients = '';
@@ -259,11 +289,6 @@ app.post("/patient_search", async (req, res) => {
 
   templateObj.patients = patients;
   res.render('patient_search', templateObj);
-});
-
-app.get("/patient_results", (req, res) => {
-  if (!current_user.logged_in) return res.redirect('/');
-  res.render("patient_results", templateObj);
 });
 
 app.listen(80, () => {
