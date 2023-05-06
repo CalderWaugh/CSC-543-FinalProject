@@ -14,7 +14,7 @@ primary key (patient_id)
 
 DROP TABLE IF EXISTS doctor;
 CREATE TABLE doctor(
-	doctor_employee_id INT,
+	doctor_employee_id INT auto_increment,
    username varchar (20),
    first_name varchar (20),
    last_name varchar (20),

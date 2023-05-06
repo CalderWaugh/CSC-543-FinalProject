@@ -13,6 +13,7 @@
               <input type="text" id="lname" name="lname"><br>
               <button type="submit" id="search_patients_btn" class="btn btn-primary">Search</button>
             </form>
+            <%= error %>
           </div>
         </div>
       </div>
@@ -27,7 +28,7 @@
               <% patients.forEach(patient => { %>
                 <tr>
                   <td><%= patient.first_name %> <%= patient.last_name %></td>
-                  <td class="create-appointment-td"><button class="btn btn-primary btn-sm">Create Appointment</button></td>
+                  <td class="create-appointment-td"><a class="btn btn-primary btn-sm" href="/profile/patient/<%= patient.patient_id %>">View Profile</a></td>
                 </tr>
               <% }); %>
           </table>

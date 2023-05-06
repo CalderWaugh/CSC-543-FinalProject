@@ -5,8 +5,8 @@
             <div class="card styler col-3">
                 <div class="card-body">
                     <i class="bi bi-person-circle" style="font-size: 70px;"></i>
-                    <h5 class="card-title"><%= current_user.username %></h5>
-                    <p class="card-text">Name: <strong><%= current_user.first_name %> <%= current_user.last_name %></strong></p>
+                    <h5 class="card-title"><%= user.user_type %>: <%= user.username %></h5>
+                    <p class="card-text">Name: <strong><%= user.first_name %> <%= user.last_name %></strong></p>
                 </div>
             </div>
         </div>

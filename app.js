@@ -7,6 +7,8 @@ const dotenv = require('dotenv');
 
 let current_user = {
   logged_in: false,
+  user_type: '',
+  id: -1,
   username: '',
   first_name: '',
   last_name: ''
@@ -69,15 +71,26 @@ app.get("/", (req, res) => {
 
 app.get("/login", (req, res) => {
   templateObj.message = ''
-  res.render("login", templateObj);
+  res.render("login_pick_usertype", templateObj);
 });
 
-app.post("/login", async (req, res) => {
+app.get("/login/:user_type", (req, res) => {
+  templateObj.message = '';
+  if (['doctor', 'patient'].includes(req.params.user_type)) {
+    templateObj.user_type = req.params.user_type;
+    res.render("login", templateObj);
+  } else return
+});
+
+app.post("/login/:user_type", async (req, res) => {
   const { username, password } = req.body;
+  const user_type = req.params.user_type;
   let user = '';
   let users = '';
+  let query = ''
   let passwordMatch = false;
-  let query = `SELECT username, first_name, last_name, password FROM patient WHERE username = '${username}'`;
+  if (user_type == 'patient') query = `SELECT patient_id, username, first_name, last_name, password FROM patient WHERE username = '${username}'`;
+  else query = `SELECT doctor_employee_id, username, first_name, last_name, password FROM doctor WHERE username = '${username}'`;
   
   users = await queryExec(query);
 
@@ -89,6 +102,9 @@ app.post("/login", async (req, res) => {
       .catch(err => console.error(err.message))  
     if (passwordMatch) {
       current_user.logged_in = true;
+      current_user.user_type = user_type;
+      if (user_type == 'patient') current_user.id = user.patient_id;
+      else current_user.id = user.doctor_employee_id;
       current_user.username = user.username;
       current_user.first_name = user.first_name;
       current_user.last_name = user.last_name;
@@ -106,24 +122,34 @@ app.post("/login", async (req, res) => {
 
 app.get("/signup", (req, res) => {
   templateObj.message = '';
-  res.render("signup", templateObj);
+  res.render("signup_pick_usertype", templateObj);
 });
 
-app.post("/signup", async (req, res) => {
+app.get("/signup/:user_type", (req, res) => {
+  templateObj.message = '';
+  if (['doctor', 'patient'].includes(req.params.user_type)) {
+    templateObj.user_type = req.params.user_type;
+    res.render("signup", templateObj);
+  } else return
+});
+
+app.post("/signup/:user_type", async (req, res) => {
   const { username, first_name, last_name, password } = req.body;
+  const user_type = req.params.user_type;
   let users = '';
-  let query = `SELECT username FROM patient WHERE username = '${username}'`;
+  let query = `SELECT username FROM ${user_type} WHERE username = '${username}'`;
   
   users = await queryExec(query);
 
   if( users.length > 0 ) {
+    templateObj.user_type = user_type;
     templateObj.message = "That username already exists";
     return res.render('signup', templateObj);
   }
 
   const hashedPassword = await hashPassword(password);
 
-  query = `INSERT INTO patient SET username='${username}', first_name='${first_name}', last_name='${last_name}', password='${hashedPassword}'`;
+  query = `INSERT INTO ${user_type} SET username='${username}', first_name='${first_name}', last_name='${last_name}', password='${hashedPassword}'`;
   const result = await queryExec(query);
   return res.redirect('../login');
 });
@@ -132,6 +158,8 @@ app.post('/logout', (req,res) => {
   if (!current_user.logged_in) return res.redirect('/');
   current_user = {
     logged_in: false,
+    user_type: '',
+    id: -1,
     username: '',
     first_name: '',
     last_name: ''
@@ -169,12 +197,19 @@ app.get("/doctors/:doc_id/pick_date", (req, res) => {
 
 app.get('/myprofile', (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
-  res.redirect(`/profile/${current_user.id}`);
+  res.redirect(`/profile/${current_user.user_type}/${current_user.id}`);
 })
 
-app.get('/profile/:id', (req, res) => {
+app.get('/profile/:user_type/:id', async (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
-  let id = req.params.id
+  const {id,user_type} = req.params;
+  let user = '';
+  if (user_type == 'patient') query = `SELECT patient_id, username, first_name, last_name FROM patient WHERE patient_id = ${id}`;
+  else query = `SELECT doctor_employee_id, username, first_name, last_name FROM doctor WHERE doctor_employee_id = ${id}`;
+  try { user = await queryExec(query) } catch { return }
+  user = user[0];
+  user.user_type = user_type;
+  templateObj.user = user;
   res.render("profile", templateObj);
 })
 
@@ -204,15 +239,12 @@ app.get("/doctor_results", (req, res) => {
 });
 
 
-
-
-
 app.get("/patient_search", (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   templateObj.patients = [];
+  templateObj.error = '';
   res.render("patient_search", templateObj);
 });
-
 
 app.post("/patient_search", async (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
@@ -222,18 +254,17 @@ app.post("/patient_search", async (req, res) => {
   
   patients = await queryExec(query);
 
+  if (patients.length == 0) templateObj.error = "No matching patients";
+  else templateObj.error = "";
+
   templateObj.patients = patients;
   res.render('patient_search', templateObj);
 });
-
 
 app.get("/patient_results", (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   res.render("patient_results", templateObj);
 });
-
-
-
 
 app.listen(80, () => {
   console.log(`Listening on port 80`);
