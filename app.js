@@ -203,6 +203,38 @@ app.get("/doctor_results", (req, res) => {
   res.render("doctor_results", templateObj);
 });
 
+
+
+
+
+app.get("/patient_search", (req, res) => {
+  if (!current_user.logged_in) return res.redirect('/');
+  templateObj.patients = [];
+  res.render("patient_search", templateObj);
+});
+
+
+app.post("/patient_search", async (req, res) => {
+  if (!current_user.logged_in) return res.redirect('/');
+  const { fname, lname } = req.body;
+  let patients = '';
+  let query = `SELECT patient_id, first_name, last_name FROM patient WHERE first_name LIKE '%${fname}%' AND last_name LIKE '%${lname}%'`;
+  
+  patients = await queryExec(query);
+
+  templateObj.patients = patients;
+  res.render('patient_search', templateObj);
+});
+
+
+app.get("/patient_results", (req, res) => {
+  if (!current_user.logged_in) return res.redirect('/');
+  res.render("patient_results", templateObj);
+});
+
+
+
+
 app.listen(80, () => {
   console.log(`Listening on port 80`);
 });
