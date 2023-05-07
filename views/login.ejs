@@ -3,12 +3,12 @@
 
 <div class="content">
     <div style="padding-top: 50px;text-align: center;" class="container justify-content-center">
-      <h3>Login - <%= user_type %></h3>
+      <h3><%= user_type.charAt(0).toUpperCase()+user_type.slice(1) %> Login</h3>
       <div class="d-flex justify-content-center" style="margin-top: 15px;">
         <div class="card styler">
           <div class="card-body">
             <form action="/login/<%= user_type %>" method="POST">
-                <div class="row d-flex">
+                <div class="row d-flex form-input">
                     <div class="col">
                         <label for="username">Username:</label>
                     </div>
@@ -16,7 +16,7 @@
                         <input type="text" id="username-input" name="username">
                     </div>
                 </div>
-                <div class="row d-flex">
+                <div class="row d-flex form-input">
                     <div class="col">
                         <label for="password">Password:</label>
                     </div>
@@ -24,7 +24,7 @@
                         <input type="password" id="password" name="password">
                     </div>
                 </div>
-                <div class="row d-flex justify-content-center">
+                <div class="row d-flex justify-content-center form-input">
                     <div class="col">
                         <input type="submit" value="Login" class="btn btn-primary">
                     </div>
@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="js/login.js"></script>
+  <%- include('partials/footer') %>
+  <script src="js/login.js"></script>
 </body>
 </html>

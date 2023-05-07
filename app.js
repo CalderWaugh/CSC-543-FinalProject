@@ -193,6 +193,11 @@ app.post('/logout', (req,res) => {
 
 app.get("/myappointments", (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
+  res.redirect(`/appointments/${current_user.user_type}/${current_user.id}`);
+});
+
+app.get("/appointments/:user_type/:id", (req, res) => {
+  if (!current_user.logged_in) return res.redirect('/');
   res.render("myappointments", templateObj);
 });
 
