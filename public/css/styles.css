@@ -16,6 +16,12 @@ body {
     background-color: var(--secondary-color);
     height: 60px;
   }
+  .navbar-dark {
+    color: black;
+  }
+  .navbar-toggler {
+    color: white;
+  }
   .active {
     color: rgb(233, 233, 233);
   }
@@ -54,15 +60,30 @@ body {
   .error-msg {
     color: red;
   }
-  .logout:hover {
-    cursor: pointer;
-  }
   .nav-username {
     color: black;
     background-color: var(--quinary-color);
     border: 1px solid var(--secondary-color);
-    border-radius: 5%;
+    border-radius: 10px;
     margin-right: 20px;
+  }
+  .dropdown-toggle:focus {
+    color: black;
+  }
+  .dropdown-menu {
+    background-color: var(--quinary-color);
+    border-radius: 10px;
+  }
+  .dropdown-style {
+    color: black;
+  }
+  .dropdown-style:hover {
+    cursor: pointer;
+    color: var(--primary-color);
+  }
+  .dropdown-item:hover {
+    color: var(--primary-color);
+    background-color: var(--tertiary-color);
   }
   [aria-current="page"] {
     pointer-events: none;
@@ -84,3 +105,20 @@ body {
     font-size: 26px;
     font-weight: 500;
   }
+  
+@media (min-width: 768px){
+  .col-style {
+    display: inline-block;
+    width: 300px;
+    height: fit-content;
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-style {
+    width: fit-content;
+    height: max-content;
+    margin: 20px 20px;
+  }
+}

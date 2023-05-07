@@ -2,39 +2,73 @@
 
       <div class="content">
         <div style="padding-top: 50px;text-align: center;" class="container">
-          <h2>Welcome to Appointment Center!</h2>
-          <p style="margin: 20px;"><em>What we have to offer:</em></p>
+          <% if (!current_user.logged_in) { %>
+            <h2>Welcome to Appointment Center!</h2>
+            <p style="margin: 20px;"><em>What we have to offer:</em></p>
+          <% } else { %>
+            <h2>Welcome, <%= current_user.first_name %> <%= current_user.last_name %>, to Appointment Center!</h2>
+            <p style="margin: 20px;"><em>What we have for <%= current_user.user_type %>s:</em></p>
+          <% } %>
           <div class="container">
             <div class="row d-flex justify-content-center">
               <% if (!current_user.logged_in) { %>
-              <div class="col-2">
+              <div class="col-style">
                 <div class="card styler">
                   <div class="card-body">
                     <h5 class="card-title">Login System</h5>
                     <p class="card-text">A secure system to login and check your appointments.</p>
-                    <a href="/login" class="btn btn-primary">Log In</a>
                   </div>
                 </div>
               </div>
               <% } %>
-              <div class="col-3">
+              <div class="col-style">
                 <div class="card styler">
                   <div class="card-body">
                     <h5 class="card-title">Appointments</h5>
                     <p class="card-text">View available appointment times, create new appointments, and view your upcomming appointments.</p>
-                    <a href="/myappointments" class="btn btn-primary">My Appointments</a>
+                    <% if (current_user.logged_in) { %>
+                      <a href="/myappointments" class="btn btn-primary">My Appointments</a>
+                    <% } %>
                   </div>
                 </div>
               </div>
-              <div class="col-2">
-                <div class="card styler">
-                  <div class="card-body">
-                    <h5 class="card-title">Doctors</h5>
-                    <p class="card-text">View the various doctors in our database.</p>
-                    <a href="/doctor_search" class="btn btn-primary">View</a>
+              <% if (current_user.logged_in) { %>
+                <% if (current_user.user_type == 'patient') { %>
+                  <div class="col-style">
+                    <div class="card styler">
+                      <div class="card-body">
+                        <h5 class="card-title">Doctors</h5>
+                        <p class="card-text">Find your doctor in our database and schedule an appointment with them.</p>
+                        <a href="/doctors" class="btn btn-primary">View</a>
+                <% } else if (current_user.user_type == 'doctor') { %>
+                  <div class="col-style">
+                    <div class="card styler">
+                      <div class="card-body">
+                        <h5 class="card-title">Patients</h5>
+                        <p class="card-text">View the various patients in our database.</p>
+                        <a href="/patient_search" class="btn btn-primary">View</a>
+                <% } %>
+                    </div>
                   </div>
                 </div>
-              </div>
+              <% } else { %>
+                <div class="col-style">
+                  <div class="card styler">
+                    <div class="card-body">
+                      <h5 class="card-title">Doctors</h5>
+                      <p class="card-text">View the various doctors in our database.</p>  
+                    </div>
+                  </div>
+                </div>
+                <div class="col-style">
+                  <div class="card styler">
+                    <div class="card-body">
+                      <h5 class="card-title">Patients</h5>
+                      <p class="card-text">View the various patients in our database.</p>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
             </div>
           </div>
         </div>

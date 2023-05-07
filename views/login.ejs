@@ -3,11 +3,11 @@
 
 <div class="content">
     <div style="padding-top: 50px;text-align: center;" class="container justify-content-center">
-      <h3>Login</h3>
+      <h3>Login - <%= user_type %></h3>
       <div class="d-flex justify-content-center" style="margin-top: 15px;">
         <div class="card styler">
           <div class="card-body">
-            <form action="/login" method="POST">
+            <form action="/login/<%= user_type %>" method="POST">
                 <div class="row d-flex">
                     <div class="col">
                         <label for="username">Username:</label>

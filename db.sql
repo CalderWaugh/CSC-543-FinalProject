@@ -14,7 +14,7 @@ primary key (patient_id)
 
 DROP TABLE IF EXISTS doctor;
 CREATE TABLE doctor(
-	doctor_employee_id INT,
+	doctor_employee_id INT auto_increment,
    username varchar (20),
    first_name varchar (20),
    last_name varchar (20),
@@ -28,10 +28,7 @@ Create table Appointment(
    patient_id INT, 
    doctor_employee_id INT, 
    status VARCHAR (30),
-   admission_date DATETIME,
-   discharge_date DATETIME,
-   admission_type VARCHAR (40),
-   exam_type VARCHAR (40),
+   date DATETIME,
    FOREIGN KEY (patient_id) REFERENCES Patient (patient_id),
    FOREIGN KEY (doctor_employee_id) REFERENCES Doctor (doctor_employee_id),
    Primary key (appointment_id)

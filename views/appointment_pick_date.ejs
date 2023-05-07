@@ -6,9 +6,11 @@
       <div class="d-flex justify-content-center" style="margin-top: 15px;">
         <div class="card styler" style="border-radius: 10px; width: 25%;">
           <div class="card-body">
-            <form>
-                <label for="appDate">Appointment Date</label>
-                <input id="appDate" class="form-control" type="date" />
+            <form action="/find_available_times" method="POST">
+                <label for="doc_id">Doctor ID</label>
+                <input name="doc_id" id="doc_id" type="number" readonly="readonly" value="<%= doc_id %>">
+                <label for="date">Appointment Date</label>
+                <input name="date" id="date" class="form-control" type="date" required/>
               <input type="submit" value="Search" class="btn btn-primary">
             </form>
           </div>
