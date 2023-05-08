@@ -7,8 +7,24 @@ body {
     --quaternary-color: #000F08;
     --quinary-color: #F4FFF8;
 }
+
+  /* Customer toggler from https://www.codeply.com/go/4FdZGlPMNV */
+  .custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(244, 255, 248, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+  .custom-toggler.navbar-toggler {
+    border-color: var(--quinary-color);
+  }
+
+  .navbar-collapse.collapsing,
+  .navbar-collapse.show {
+    top: 400px;
+    z-index: 1;
+    background-color: black;
+    color: black;
+  }
   a, .nav-link {
-    color: white;
+    color: var(--primary-color);
   }
   a:hover, .nav-link:hover {
     color: var(--tertiary-color);
@@ -72,18 +88,11 @@ body {
   .error-msg {
     color: red;
   }
-  .nav-username {
-    color: black;
-    background-color: var(--quinary-color);
-    border: 1px solid var(--secondary-color);
-    border-radius: 10px;
-    margin-right: 20px;
-  }
   .dropdown-toggle:focus {
-    color: black;
+    color: var(--tertiary-color);
   }
   .dropdown-menu {
-    background-color: var(--quinary-color);
+    background-color: var(--primary-color);
     border-radius: 10px;
   }
   .dropdown-style {
@@ -96,6 +105,13 @@ body {
   .dropdown-item:hover {
     color: var(--primary-color);
     background-color: var(--tertiary-color);
+  }
+  .nav-username {
+    color: black;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    margin-right: 20px;
   }
   .form-input {
     margin: 10px 0;
