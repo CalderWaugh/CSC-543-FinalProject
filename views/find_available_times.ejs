@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <% include partials/head %>
+  </head>
+  <body>
+    <% include partials/header %>
+    <div class="content">
+      <div
+        style="padding-top: 50px; text-align: center"
+        class="container justify-content-center"
+      >
+        <h3>Available times on <%= appointmentDate %>:</h3>
+        <div style="padding: 0 25%">
+          <table class="table styler">
+            <thead>
+              <th>Time</th>
+              <th>Action</th>
+            </thead>
+            <% availableTimes.forEach(function(time) { %>
+            <tr>
+              <% if (time.available) { %>
+              <td data-time="<%= time.value %>"><%= time.value %></td>
+              <td class="pick-time-td">
+                <button class="btn btn-primary btn-sm">Pick</button>
+              </td>
+              <% } else { %>
+              <td data-time="<%= time.value %>"><%= time.value %></td>
+              <td><span class="text-danger">Unavailable</span></td>
+              <% } %>
+            </tr>
+            <% }); %>
+          </table>
+        </div>
+      </div>
+    </div>
+    <% include partials/footer %>
+    <script>
+      const timeRows = document.querySelectorAll("tr[data-time]");
+
+      timeRows.forEach((row) => {
+        const button = row.querySelector("button");
+        const time = row.dataset.time;
+
+        button.addEventListener("click", () => {
+          console.log(`You selected ${time} on <%= appointmentDate %>.`);
+        });
+      });
+    </script>
+  </body>
+</html>
