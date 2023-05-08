@@ -33,3 +33,6 @@ Create table Appointment(
    FOREIGN KEY (doctor_employee_id) REFERENCES Doctor (doctor_employee_id),
    Primary key (appointment_id)
 );
+
+INSERT INTO appointment
+VALUES (1,1,1,'Waiting','2023-01-23 12:45:56');

@@ -15,7 +15,7 @@
                 </thead>
                 <% myApt.forEach(function(appointment) { %>
                 <tr>
-                    <td><%= appointment.doctor_employee_id %></td>
+                    <td><%= appointment.first_name %> <%= appointment.last_name %></td>
                     <td><%= appointment.date.toLocaleDateString() %></td>
                     
                     <td><%= appointment.status %></td>
