@@ -199,13 +199,14 @@ app.get("/myappointments", async (req, res) => {
   
   if (!current_user.logged_in) return res.redirect('/');
 
-  const myAptQuery = `SELECT doctor_employee_id, date, status FROM appointment WHERE patient_id = ${current_user.id}`;
+  const myAptQuery = `SELECT d.first_name, d.last_name, a.date, a.status FROM appointment AS a JOIN doctor AS d WHERE a.patient_id = ${current_user.id}`;
 
   try {
     const results = await queryExec(myAptQuery);
 
     const myApt = results.map(row => ({
-      doctor: row.doctor_employee_id,
+      first_name: row.first_name,
+      last_name: row.last_name,
       date: row.date,
       status: row.status
     }));
