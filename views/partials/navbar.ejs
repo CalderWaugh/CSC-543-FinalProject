@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-default">
+  <div class="container-fluid" style="margin: 0 15%;">
+    <a class="navbar-brand" href="/">Appointment Center</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent"">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <% if (current_user.logged_in == true) { %>
+        <% if (current_user.user_type == 'patient') { %>
+          <li class='nav-item nav-item-left'><a class="nav-link" href="/doctors">Doctors</a></li>
+          <li class='nav-item nav-item-left'><a class="nav-link" href="/myappointments">My Appointments</a></li>
+        <% } else if (current_user.user_type == 'doctor') { %>
+          <li class='nav-item nav-item-left'><a class="nav-link" href="/patients">Patients</a></li>
+          <li class='nav-item nav-item-left'><a class="nav-link" href="/myappointments">My Appointments</a></li>
+        <% } %>
+      <% } %>
+      </ul>
+      <ul class="navbar-nav d-flex">
+        <% if (current_user.logged_in == false) { %>
+          <li class='nav-item nav-item-left'><a class="nav-link" href="/signup">Sign up</a></li>
+          <li class='nav-item nav-item-right'><a class="nav-link" href="/login">Login</a></li>
+        <% } else { %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle nav-username" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= current_user.last_name %>, <%= current_user.first_name %> <i class="bi bi-person"></i>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li class='dropdown-item'><a class="nav-link dropdown-style" href="/profile/<%= current_user.user_type %>/<%= current_user.id %>">Profile</a></li>
+            <form id="logout_form" method="post" action="/logout">
+              <li class='dropdown-item'><a class="nav-link dropdown-style" onclick="document.getElementById('logout_form').submit();">Log out</a></li>
+            </form>
+          </ul>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
