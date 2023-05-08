@@ -213,8 +213,13 @@ app.get("/doctors/:doc_id/pick_date", (req, res) => {
   res.render("appointment_pick_date", templateObj);
 });
 
-app.get("/doctors/:doc_id/:date/pick_time", (req, res) => {
+app.get("/doctors/:doc_id/:date/pick_time", async (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
+  const docId = req.params.doc_id;
+  const appointmentDate = req.params.date;
+  const [rows] = await db.execute("SELECT * FROM appointments WHERE doctor_id = ? AND date = ?", [docId,appointmentDate]);
+  const availableTimes = rows.map(row => ({ value: row.time, available: row.available}));
+  const templateObj = { appointmentDate, availableTimes };
   res.render("available_times", templateObj);
 });
 
