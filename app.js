@@ -191,9 +191,34 @@ app.post('/logout', (req,res) => {
 // ----- APPOINTMENTS ------
 // -------------------------
 
-app.get("/myappointments", (req, res) => {
+// my appointments 
+
+//my appointments 
+app.get("/myappointments", async (req, res) => {
+  console.log("started my appointments query")
+  
   if (!current_user.logged_in) return res.redirect('/');
-  res.render("myappointments", templateObj);
+
+  const myAptQuery = `SELECT doctor_employee_id, date, status FROM appointment WHERE patient_id = ${current_user.id}`;
+
+  try {
+    const results = await queryExec(myAptQuery);
+
+    const myApt = results.map(row => ({
+      doctor: row.doctor_employee_id,
+      date: row.date,
+      status: row.status
+    }));
+
+    console.log("appointment data received: ")
+
+    const templateObj = { myApt, current_user };
+
+    res.render("myappointments", templateObj);
+  } catch (error) {
+    console.log("error receiving appointment data: ", error);
+    res.sendStatus(500);
+  }
 });
 
 app.get("/create_appointment", (req, res) => {
