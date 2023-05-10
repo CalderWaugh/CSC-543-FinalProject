@@ -23,6 +23,10 @@ let new_appointment = {
   date: '',
 }
 
+let times = [
+  '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
+]
+
 let templateObj = {
   current_user: current_user
 }
@@ -217,10 +221,10 @@ app.get("/doctors/:doc_id/:date/pick_time", async (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   const docId = req.params.doc_id;
   const appointmentDate = req.params.date;
-  const [rows] = await db.execute("SELECT * FROM appointments WHERE doctor_id = ? AND date = ?", [docId,appointmentDate]);
-  const availableTimes = rows.map(row => ({ value: row.time, available: row.available}));
+  const taken_times = await queryExec(`SELECT DATE_FORMAT(date,'%H:%i') FROM appointment WHERE doctor_employee_id = ${docId} AND date = ${appointmentDate}`);
+  const availableTimes = times.filter(time => !(taken_times.includes(time)));
  
- 
+  templateObj.doc_id = docId;
   templateObj.appointmentDate = appointmentDate;
   templateObj.availableTimes = availableTimes;
 

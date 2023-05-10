@@ -29,7 +29,11 @@ Create table Appointment(
    doctor_employee_id INT, 
    status VARCHAR (30),
    date DATETIME,
+   reason VARCHAR (50),
    FOREIGN KEY (patient_id) REFERENCES Patient (patient_id),
    FOREIGN KEY (doctor_employee_id) REFERENCES Doctor (doctor_employee_id),
    Primary key (appointment_id)
 );
+
+INSERT INTO appointment
+VALUES (1,1,'Waiting','1999-01-23 12:45', 'Heart Surgery');
