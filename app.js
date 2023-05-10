@@ -219,7 +219,12 @@ app.get("/doctors/:doc_id/:date/pick_time", async (req, res) => {
   const appointmentDate = req.params.date;
   const [rows] = await db.execute("SELECT * FROM appointments WHERE doctor_id = ? AND date = ?", [docId,appointmentDate]);
   const availableTimes = rows.map(row => ({ value: row.time, available: row.available}));
-  const templateObj = { appointmentDate, availableTimes };
+ 
+ 
+  templateObj.appointmentDate = appointmentDate;
+  templateObj.availableTimes = availableTimes;
+
+
   res.render("available_times", templateObj);
 });
 
