@@ -1,13 +1,30 @@
 body {
     background-color: var(--primary-color);
+    overflow-x: hidden;
     --primary-color: #E9FFF9;
     --secondary-color: #1D3354;
     --tertiary-color: #D64045;
     --quaternary-color: #000F08;
     --quinary-color: #F4FFF8;
 }
+
+  /* Customer toggler from https://www.codeply.com/go/4FdZGlPMNV */
+  .custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(244, 255, 248, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+  .custom-toggler.navbar-toggler {
+    border-color: var(--quinary-color);
+  }
+
+  .navbar-collapse.collapsing,
+  .navbar-collapse.show {
+    top: 400px;
+    z-index: 1;
+    background-color: black;
+    color: black;
+  }
   a, .nav-link {
-    color: white;
+    color: var(--primary-color);
   }
   a:hover, .nav-link:hover {
     color: var(--tertiary-color);
@@ -27,6 +44,17 @@ body {
   }
   .styler {
     box-shadow: 2px 2px 2px black;
+  }
+  .card-text {
+    color: var(--secondary-color);
+    padding: 5px;
+  }
+  .doctor-profile {
+    color: black;
+  }
+  hr {
+    border-top: 2px solid var(--tertiary-color);
+    margin: 5px 0;
   }
   .card {
     border-radius: 10px;
@@ -60,18 +88,11 @@ body {
   .error-msg {
     color: red;
   }
-  .nav-username {
-    color: black;
-    background-color: var(--quinary-color);
-    border: 1px solid var(--secondary-color);
-    border-radius: 10px;
-    margin-right: 20px;
-  }
   .dropdown-toggle:focus {
-    color: black;
+    color: var(--tertiary-color);
   }
   .dropdown-menu {
-    background-color: var(--quinary-color);
+    background-color: var(--primary-color);
     border-radius: 10px;
   }
   .dropdown-style {
@@ -84,6 +105,16 @@ body {
   .dropdown-item:hover {
     color: var(--primary-color);
     background-color: var(--tertiary-color);
+  }
+  .nav-username {
+    color: black;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    margin-right: 20px;
+  }
+  .form-input {
+    margin: 10px 0;
   }
   [aria-current="page"] {
     pointer-events: none;
@@ -105,6 +136,18 @@ body {
     font-size: 26px;
     font-weight: 500;
   }
+  footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid black;
+    height: 40px;
+    padding-top: 5px;
+    color: white;
+    background-color: var(--secondary-color);
+  }
   
 @media (min-width: 768px){
   .col-style {
@@ -115,10 +158,17 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+  .profile-card {
+    width: 300px;
+  }
   .col-style {
-    width: fit-content;
+    width: 300px;
     height: max-content;
     margin: 20px 20px;
+  }
+  h2 {
+    width: 300px;
+    margin: 0 auto;
   }
 }

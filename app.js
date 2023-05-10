@@ -226,7 +226,7 @@ app.get("/myappointments", async (req, res) => {
   }
 });
 
-app.get("/create_appointment", (req, res) => {
+app.get("/appointment/new/:doc_id/:date/:time", (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   res.render("create_appointment", templateObj);
 });
