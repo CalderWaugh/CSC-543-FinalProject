@@ -23,6 +23,10 @@ let new_appointment = {
   date: '',
 }
 
+let times = [
+  '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
+]
+
 let templateObj = {
   current_user: current_user
 }
@@ -191,14 +195,35 @@ app.post('/logout', (req,res) => {
 // ----- APPOINTMENTS ------
 // -------------------------
 
-app.get("/myappointments", (req, res) => {
-  if (!current_user.logged_in) return res.redirect('/');
-  res.redirect(`/appointments/${current_user.user_type}/${current_user.id}`);
-});
+// my appointments 
 
-app.get("/appointments/:user_type/:id", (req, res) => {
+//my appointments 
+app.get("/myappointments", async (req, res) => {
+  console.log("started my appointments query")
+  
   if (!current_user.logged_in) return res.redirect('/');
-  res.render("myappointments", templateObj);
+
+  const myAptQuery = `SELECT d.first_name, d.last_name, a.date, a.status FROM appointment AS a JOIN doctor AS d WHERE a.patient_id = ${current_user.id}`;
+
+  try {
+    const results = await queryExec(myAptQuery);
+
+    const myApt = results.map(row => ({
+      first_name: row.first_name,
+      last_name: row.last_name,
+      date: row.date,
+      status: row.status
+    }));
+
+    console.log("appointment data received: ")
+
+    const templateObj = { myApt, current_user };
+
+    res.render("myappointments", templateObj);
+  } catch (error) {
+    console.log("error receiving appointment data: ", error);
+    res.sendStatus(500);
+  }
 });
 
 app.get("/appointment/new/:doc_id/:date/:time", (req, res) => {
@@ -218,8 +243,18 @@ app.get("/doctors/:doc_id/pick_date", (req, res) => {
   res.render("appointment_pick_date", templateObj);
 });
 
-app.get("/doctors/:doc_id/:date/pick_time", (req, res) => {
+app.get("/doctors/:doc_id/:date/pick_time", async (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
+  const docId = req.params.doc_id;
+  const appointmentDate = req.params.date;
+  const taken_times = await queryExec(`SELECT DATE_FORMAT(date,'%H:%i') FROM appointment WHERE doctor_employee_id = ${docId} AND date = ${appointmentDate}`);
+  const availableTimes = times.filter(time => !(taken_times.includes(time)));
+ 
+  templateObj.doc_id = docId;
+  templateObj.appointmentDate = appointmentDate;
+  templateObj.availableTimes = availableTimes;
+
+
   res.render("available_times", templateObj);
 });
 

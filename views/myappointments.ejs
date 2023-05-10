@@ -1,4 +1,5 @@
 
+
 <%- include('partials/head') %>
 
 <div class="content">
@@ -10,26 +11,16 @@
                     <th>Doctor</th>
                     <th>Date</th>
                     <th>Time</th>
-                    <th>Purpose</th>
+                    <th>Status</th>
                 </thead>
+                <% myApt.forEach(function(appointment) { %>
                 <tr>
-                    <td>Bob Smith</td>
-                    <td>2/22/23</td>
-                    <td>2:00 pm</td>
-                    <td>Colonoscopy</td>
+                    <td><%= appointment.first_name %> <%= appointment.last_name %></td>
+                    <td><%= appointment.date.toLocaleDateString() %></td>
+                    <td><%= appointment.date.toLocaleTimeString() %></td>
+                    <td><%= appointment.status %></td>
                 </tr>
-                <tr>
-                    <td>Billy Bob</td>
-                    <td>2/23/23</td>
-                    <td>1:00 pm</td>
-                    <td>Heart Surgery</td>
-                </tr>
-                <tr>
-                    <td>Stan Filly</td>
-                    <td>2/11/23</td>
-                    <td>10:00 am</td>
-                    <td>Lasik Eye Surgery</td>
-                </tr>
+                <% }); %>
             </table>
         </div>
     </div>
