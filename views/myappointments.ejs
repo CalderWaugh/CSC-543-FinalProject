@@ -5,10 +5,10 @@
 <div class="content">
     <div style="padding-top: 50px;text-align: center;" class="container">
         <h3>My Appointments</h3>
-        <div style="padding: 0 25%;">
+        <div class="table-container">
             <table class="table styler">
                 <thead>
-                    <th>Doctor</th>
+                    <th><%= appUserType.charAt(0).toUpperCase()+appUserType.slice(1) %></th>
                     <th>Date</th>
                     <th>Time</th>
                     <th>Status</th>
@@ -17,7 +17,7 @@
                 <tr>
                     <td><%= appointment.first_name %> <%= appointment.last_name %></td>
                     <td><%= appointment.date.toLocaleDateString() %></td>
-                    <td><%= appointment.date.toLocaleTimeString() %></td>
+                    <td><%= appointment.date.toLocaleString('en-US', { hour: 'numeric', hour12: true }) %></td>
                     <td><%= appointment.status %></td>
                 </tr>
                 <% }); %>

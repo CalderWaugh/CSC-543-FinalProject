@@ -15,14 +15,6 @@ body {
   .custom-toggler.navbar-toggler {
     border-color: var(--quinary-color);
   }
-
-  .navbar-collapse.collapsing,
-  .navbar-collapse.show {
-    top: 400px;
-    z-index: 1;
-    background-color: black;
-    color: black;
-  }
   a, .nav-link {
     color: var(--primary-color);
   }
@@ -31,7 +23,6 @@ body {
   }
   .navbar {
     background-color: var(--secondary-color);
-    height: 60px;
   }
   .navbar-dark {
     color: black;
@@ -62,9 +53,10 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.3);
   }
   .table {
-      margin-top: 15px;
       border-radius: 10px;
       background-color: var(--quinary-color);
+      width: 50%;
+      margin: 15px auto;
   }
   .btn-primary {
     background-color: var(--tertiary-color);
@@ -116,6 +108,11 @@ body {
   .form-input {
     margin: 10px 0;
   }
+  
+  .doc_results, .pick-date-card, .create-appointment-card, .patient-search, .patient_results, .doc-search-card {
+    width: 400px;
+  }
+
   [aria-current="page"] {
     pointer-events: none;
     cursor: default;
@@ -149,7 +146,7 @@ body {
     background-color: var(--secondary-color);
   }
   
-@media (min-width: 768px){
+@media only screen and (min-width: 992px){
   .col-style {
     display: inline-block;
     width: 300px;
@@ -158,14 +155,18 @@ body {
   }
 }
 
-@media (max-width: 992px) {
-  .profile-card {
-    width: 300px;
+@media only screen and (max-width: 992px) {
+  .profile-card{
+    width: 400px;
   }
   .col-style {
     width: 300px;
     height: max-content;
     margin: 20px 20px;
+  }
+  .table {
+    width: 400px;
+    margin: 15px auto;
   }
   h2 {
     width: 300px;

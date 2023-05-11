@@ -24,7 +24,7 @@ let new_appointment = {
 }
 
 let times = [
-  '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
+  '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
 ]
 
 let templateObj = {
@@ -195,15 +195,15 @@ app.post('/logout', (req,res) => {
 // ----- APPOINTMENTS ------
 // -------------------------
 
-// my appointments 
-
 //my appointments 
 app.get("/myappointments", async (req, res) => {
-  console.log("started my appointments query")
-  
   if (!current_user.logged_in) return res.redirect('/');
+  let myAptQuery = '';
+  let appUserType = '';
+  if (current_user.user_type == 'patient') appUserType = 'doctor';
+  else appUserType = 'patient';
 
-  const myAptQuery = `SELECT d.first_name, d.last_name, a.date, a.status FROM appointment AS a JOIN doctor AS d WHERE a.patient_id = ${current_user.id}`;
+  myAptQuery = `SELECT d.first_name, d.last_name, a.date, a.status FROM appointment AS a JOIN ${appUserType} AS d WHERE a.patient_id = ${current_user.id}`;
 
   try {
     const results = await queryExec(myAptQuery);
@@ -215,9 +215,8 @@ app.get("/myappointments", async (req, res) => {
       status: row.status
     }));
 
-    console.log("appointment data received: ")
-
-    const templateObj = { myApt, current_user };
+    templateObj.myApt = myApt;
+    templateObj.appUserType = appUserType;
 
     res.render("myappointments", templateObj);
   } catch (error) {
@@ -226,9 +225,20 @@ app.get("/myappointments", async (req, res) => {
   }
 });
 
-app.get("/appointment/new/:doc_id/:date/:time", (req, res) => {
+app.get("/appointment/:doc_id/:date/:time", async (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
+  let doc_name = await queryExec(`SELECT first_name, last_name FROM doctor WHERE doctor_employee_id = ${req.params.doc_id}`);
+  templateObj.doc_name = `${doc_name[0].first_name} ${doc_name[0].last_name}`
+  templateObj.date = req.params.date;
+  templateObj.time = req.params.time;
   res.render("create_appointment", templateObj);
+});
+
+app.post("/appointment/new", async (req, res) => {
+  if (!current_user.logged_in) return res.redirect('/');
+  const { doc_id, doc_name, date, time, reason } = req.body;
+  let insert = await queryExec(`INSERT INTO appointment VALUES (null, ${current_user.id}, ${doc_id}, 'Scheduled', '${date} ${time}:00' , '${reason}')`);
+  res.redirect(`/myappointments`);
 });
 
 app.post("/find_available_times", (req, res) => {
@@ -247,9 +257,18 @@ app.get("/doctors/:doc_id/:date/pick_time", async (req, res) => {
   if (!current_user.logged_in) return res.redirect('/');
   const docId = req.params.doc_id;
   const appointmentDate = req.params.date;
-  const taken_times = await queryExec(`SELECT DATE_FORMAT(date,'%H:%i') FROM appointment WHERE doctor_employee_id = ${docId} AND date = ${appointmentDate}`);
+  const taken_times_query = await queryExec(`SELECT DATE_FORMAT(date,'%H:%i') AS \`time\` FROM appointment WHERE doctor_employee_id = ${docId} AND date LIKE '${appointmentDate}%'`);
+  let taken_times = [];
+  taken_times_query.forEach(time => taken_times.push(time.time));
   const availableTimes = times.filter(time => !(taken_times.includes(time)));
  
+  let new_date = new Date(appointmentDate);
+  let date = new_date.getUTCDate();
+  let month = new_date.getUTCMonth() + 1;
+  let year = new_date.getUTCFullYear();
+  let display_date = `${month}/${date}/${year}`
+
+  templateObj.display_date = display_date;
   templateObj.doc_id = docId;
   templateObj.appointmentDate = appointmentDate;
   templateObj.availableTimes = availableTimes;

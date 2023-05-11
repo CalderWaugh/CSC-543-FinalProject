@@ -4,7 +4,7 @@
     <div style="padding-top: 50px;text-align: center;" class="container justify-content-center">
       <h3>Search for a Doctor</h3>
       <div class="d-flex justify-content-center" style="margin-top: 15px;">
-        <div class="card styler" style="border-radius: 10px; width: 25%;">
+        <div class="card styler doc-search-card">
           <div class="card-body">
             <form action="/doctors" method="POST">
               <div class="form-input">
@@ -24,7 +24,7 @@
       <br>
       <% if (doctors.length > 0) { %>
       <h3>Matching Doctors</h3>
-      <div style="padding: 0 25%;">
+      <div>
           <table class="table styler doc_results">
               <thead>
                   <th>Doctor</th>

@@ -4,18 +4,18 @@
         style="padding-top: 50px; text-align: center"
         class="container justify-content-center"
       >
-        <h3>Available times on <%= appointmentDate %>:</h3>
-        <div style="padding: 0 25%">
+        <h3>Available times on <%= display_date %></h3>
+        <div>
           <table class="table styler">
             <thead>
               <th>Time</th>
-              <th>Action</th>
+              <th></th>
             </thead>
             <% availableTimes.forEach(function(time) { %>
               <tr>
-                <td><%= time %></td>
+                <td><%= (new Date(`${appointmentDate}T${time}`)).toLocaleString('en-US', { hour: 'numeric', hour12: true }) %></td>
                 <td class="pick-time-td">
-                  <a class="btn btn-primary btn-sm" href="/appointment/new/<%= doc_id %>/<%= appointmentDate %>/<%= time %>">Pick</a>
+                  <a class="btn btn-primary btn-sm" href="/appointment/<%= doc_id %>/<%= appointmentDate %>/<%= time %>">Pick</a>
                 </td>
               </tr>
             <% }); %>
@@ -23,7 +23,6 @@
         </div>
       </div>
     </div>
-    
   <%- include('partials/footer') %>
 </body>
 </html>
