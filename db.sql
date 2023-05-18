@@ -37,3 +37,4 @@ Create table Appointment(
 
 INSERT INTO appointment
 VALUES (1,1,'Waiting','1999-01-23 12:45', 'Heart Surgery');
+
